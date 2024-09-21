@@ -28,9 +28,9 @@ class Adaptador(var Datos: MutableList<tbEscritores>): RecyclerView.Adapter<View
     }
 
     fun actualizarEscritores(nuevaLista: List<tbEscritores>) {
-        this.Datos.clear()      // Limpia la lista actual
-        this.Datos.addAll(nuevaLista)  // Añade la nueva lista
-        notifyDataSetChanged()  // Notifica al adaptador que los datos han cambiado
+        this.Datos.clear()
+        this.Datos.addAll(nuevaLista)
+        notifyDataSetChanged()
     }
 
     fun eliminarRegistro(nombreEscritor: String, posicion: Int){
@@ -117,8 +117,7 @@ class Adaptador(var Datos: MutableList<tbEscritores>): RecyclerView.Adapter<View
             val layout = LinearLayout(context)
             layout.orientation = LinearLayout.VERTICAL
             layout.setPadding(50, 20, 50, 20)
-
-            // Crear los EditText para cada campo
+            
             val cuadroTextoNombre = EditText(context).apply {
                 hint = "Nombre del escritor"
                 setText(item.nombreEscritor) // Mostrar el nombre actual
@@ -146,18 +145,15 @@ class Adaptador(var Datos: MutableList<tbEscritores>): RecyclerView.Adapter<View
             }
             layout.addView(cuadroTextoCorreo)
 
-            // Agregar el LinearLayout al diálogo
             builder.setView(layout)
 
-            // Configurar los botones del diálogo
             builder.setPositiveButton("Actualizar") { dialog, which ->
-                // Obtener los valores de los campos
+
                 val nuevoNombre = cuadroTextoNombre.text.toString()
                 val nuevaEdad = cuadroTextoEdad.text.toString().toInt()
                 val nuevoPeso = cuadroTextoPeso.text.toString().toDouble()
                 val nuevoCorreo = cuadroTextoCorreo.text.toString()
 
-                // Llamada al método para actualizar con los nuevos datos
                 editarEscritor(nuevoNombre, nuevaEdad, nuevoPeso, nuevoCorreo, item.uuid)
             }
             builder.setNegativeButton("Cancelar"){
